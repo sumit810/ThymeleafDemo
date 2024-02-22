@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Student Registration Form</title>
+    <link rel = "stylesheet" th:href="@{/css/demo.css}" />
+</head>
+<h3>Student Registration Form</h3>
+<form th:action="@{/processStudentForm}" th:object ="${student}" method="POST">
+    First Name: <input type ="text" th:field ="${student.firstName}" />
+    <br><br>
+    *Last Name:  <input type ="text" th:field ="${student.lastName}" />
+    <!-- add error message (if present) -->
+    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error" />
+    <br><br>
+    Country:
+
+    <!-- dynamically fetching the value of a country -->
+    <select th:field="*{country}" >
+        <option th:each="tempCountry : ${countries}" th:value="${tempCountry}" th:text="${tempCountry}" />
+    </select>
+<!--
+    <select th:field="*{country}">
+        <option th:value="Brazil">Brazil</option>
+        <option th:value="Russia">Russia</option>
+        <option th:value="India">India</option>
+        <option th:value="Italy">Italy</option>
+        <option th:value="Canada">Canada</option>
+        <option th:value="Australia">Australia</option>
+    </select>
+-->
+    <br><br>
+
+    Favorite Programming Language :
+    <!-- Reading from the property file -->
+    <input type="radio" th:field="*{favoriteLanguage}"
+                        th:each="tempLanguage : ${languages}"
+                        th:value="${tempLanguage}"
+                        th:text="${tempLanguage}" />
+
+    <!--
+    <input type="radio" th:field="*{favoriteLanguage}" th:value="Go">Go</input>
+    <input type="radio" th:field="*{favoriteLanguage}" th:value="Java">Java</input>
+    <input type="radio" th:field="*{favoriteLanguage}" th:value="Python">Python</input>
+-->
+
+
+    <br><br>
+
+    Favorite Operating Systems:
+    <!--
+    <input type="checkbox" th:field="*{favoriteSystems}" th:value="Linux">Linux</input>
+    <input type="checkbox" th:field="*{favoriteSystems}" th:value="macOS">macOS</input>
+    <input type="checkbox" th:field="*{favoriteSystems}" th:value="'Microsoft Windows'">Microsoft Windows</input>
+    -->
+    <!-- Reading from the property file -->
+    <input type="checkbox" th:field="*{favoriteSystems}"
+           th:each="tempSystems : ${systems}"
+           th:value="${tempSystems}"
+           th:text="${tempSystems}" />
+    <br><br>
+
+    Postal Code:  <input type ="text" th:field ="${student.postalCode}" />
+    <!-- add error message (if present) -->
+    <span th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}" class="error" />
+    <br><br>
+
+    Course Code:  <input type ="text" th:field ="${student.courseCode}" />
+    <!-- add error message (if present) -->
+    <span th:if="${#fields.hasErrors('courseCode')}" th:errors="*{courseCode}" class="error" />
+    <br><br>
+
+    <input type="submit" value="Submit" />
+</form>
+</html>

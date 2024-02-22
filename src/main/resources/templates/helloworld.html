@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <title>Hello World - Input form</title>
+    <link rel = "stylesheet" th:href="@{/css/demo.css}" />
+</head>
+<body>
+Hello World of Spring!
+
+Student Name: <span th:text="${param.studentName}" />
+
+The Message: Yo! <span th:text="${message}" />
+
+</body>
+
+</html>
